@@ -1,0 +1,10 @@
+name: publish npm package
+on:
+    push:
+        branches: [master, main]
+jobs:
+    auto_release_npm_package:
+        if: "!contains(github.event.head_commit.message, 'skip ci')"
+        uses: daichangxin/github-config/.github/workflows/auto_release_npm_package.yml@master
+        secrets:
+            NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
