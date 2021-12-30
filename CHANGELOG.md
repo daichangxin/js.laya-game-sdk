@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.4 (2021-12-30)
+
+
+### Bug Fixes
+
+* publish token error ([e9c5fee](https://github.com/daichangxin/js.laya-game-sdk/commit/e9c5feee70941434287da9b5a3ae046428afed33))
+
 ### 0.0.3 (2021-12-30)
 
 ### 0.0.2 (2021-12-30)
