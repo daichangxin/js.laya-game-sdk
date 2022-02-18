@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.5 (2022-02-18)
+
+
+### Features
+
+* 取消文本自动拉升到skin最上层，如果需要文本叠加处理，在UI中手动操作 ([0cc7c5e](https://github.com/daichangxin/js.laya-game-sdk/commit/0cc7c5e89dedccc2796787358b492cb55f1c919a))
+
 ### 0.0.4 (2021-12-30)
 
 
