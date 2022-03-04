@@ -52,17 +52,18 @@ export class UILayer implements IResize {
     }
 
     showUI(view: fgui.GObject | SkinBase) {
-        const child = view instanceof fgui.GObject ? view : view.skin;
+        const child = 'displayObject' in view ? view : view.skin;
         this._uiContainer.addChild(child);
     }
 
     showWindow(win: Panel | fgui.GObject) {
-        const child = win instanceof Panel ? win.skin : win;
+        const isGObject = 'displayObject' in win;
+        const child = isGObject? win : win.skin;
         // 要先addChild，再sort，否则不生效
         // this._root.addChild(child);
         this._windowContainer.addChild(child);
         // child.sortingOrder = this._windowOrderIndex++;
-        if (win instanceof Panel) {
+        if (!isGObject) {
             this._popUpList.push(win);
         }
     }
@@ -103,11 +104,12 @@ export class UILayer implements IResize {
     bringWindowTop(win: fgui.GObject | Panel) {
         // 重复调用，面板可能还在加载中
         if (!win) return;
-        const child = win instanceof fgui.GObject ? win : win.skin;
+        const isGObject = 'displayObject' in win;
+        const child = isGObject ? win : win.skin;
         if (child && child.parent) {
             // child.parent.addChild(child);
             child.parent.setChildIndex(child, child.parent.numChildren - 1);
-            if (win instanceof Panel) {
+            if (!isGObject) {
                 // 拉到最后一个
                 const i = this._popUpList.indexOf(win);
                 if (i !== -1) {
