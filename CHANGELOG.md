@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.6 (2022-03-04)
+
+
+### Bug Fixes
+
+* instanceOf check error ([4aafbaa](https://github.com/daichangxin/js.laya-game-sdk/commit/4aafbaa2f08a55b1e7849fd89bf88f8d9d84346a))
+
 ### 0.0.5 (2022-02-18)
 
 
