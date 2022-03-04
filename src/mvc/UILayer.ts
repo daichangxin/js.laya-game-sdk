@@ -52,18 +52,18 @@ export class UILayer implements IResize {
     }
 
     showUI(view: fgui.GObject | SkinBase) {
-        const child = 'displayObject' in view ? view : view.skin;
-        this._uiContainer.addChild(child);
+        if ('displayObject' in view ) {
+            this._uiContainer.addChild(view);    
+        } else {
+            this._uiContainer.addChild(view.skin);
+        }
     }
 
     showWindow(win: Panel | fgui.GObject) {
-        const isGObject = 'displayObject' in win;
-        const child = isGObject? win : win.skin;
-        // 要先addChild，再sort，否则不生效
-        // this._root.addChild(child);
-        this._windowContainer.addChild(child);
-        // child.sortingOrder = this._windowOrderIndex++;
-        if (!isGObject) {
+        if ('displayObject' in win) {
+            this._windowContainer.addChild(win);
+        } else {
+            this._windowContainer.addChild(win.skin);
             this._popUpList.push(win);
         }
     }
@@ -104,12 +104,16 @@ export class UILayer implements IResize {
     bringWindowTop(win: fgui.GObject | Panel) {
         // 重复调用，面板可能还在加载中
         if (!win) return;
-        const isGObject = 'displayObject' in win;
-        const child = isGObject ? win : win.skin;
+        let child:fgui.GObject;
+        if ('displayObject' in win) {
+            child = win
+        } else {
+            child = win.skin;
+        }
+
         if (child && child.parent) {
-            // child.parent.addChild(child);
             child.parent.setChildIndex(child, child.parent.numChildren - 1);
-            if (!isGObject) {
+            if (!('displayObject' in win)) {
                 // 拉到最后一个
                 const i = this._popUpList.indexOf(win);
                 if (i !== -1) {
