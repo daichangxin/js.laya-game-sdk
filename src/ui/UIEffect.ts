@@ -3,12 +3,10 @@ import { TouchRelease } from '../utils/TouchRelease';
 class BounceEffect {
     private _targetList: fgui.GObject[];
     private _touchingList: fgui.GObject[];
-    private _filterList: fgui.GObject[];
 
     constructor() {
         this._targetList = [];
         this._touchingList = [];
-        this._filterList = [];
         TouchRelease.on(this, this.onRelease);
     }
 
@@ -20,11 +18,6 @@ class BounceEffect {
 
             Laya.Tween.clearAll(target);
             Laya.Tween.to(target, { scaleX: 1 * rateX, scaleY: 1 * rateY }, 150, Laya.Ease.backOut);
-        }
-
-        while(this._filterList.length){
-            const filterTarget = this._filterList.shift();
-            filterTarget.filters = [];
         }
     }
 
@@ -46,7 +39,9 @@ class BounceEffect {
                 colorFilter.adjustBrightness(30);
                 colorFilter.adjustSaturation(30);
                 target.filters = [colorFilter];
-                this._filterList.push(target);
+            });
+            target.on(Laya.Event.MOUSE_OUT, this, () => {
+                target.filters = [];
             });
         }
     }
