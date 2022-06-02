@@ -46,6 +46,7 @@ class BounceEffect {
                 colorFilter.adjustBrightness(30);
                 colorFilter.adjustSaturation(30);
                 target.filters = [colorFilter];
+                this._filterList.push(target);
             });
         }
     }
